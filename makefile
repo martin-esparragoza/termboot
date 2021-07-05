@@ -2,7 +2,7 @@ ASSEMBLER = nasm
 
 OUTPUT_DIR = target
 BOOTSTRAP = boot#.s
-SHBOOT_OUT = shboot.bin
+SHBOOT_OUT = termboot.bin
 ASM_FLAGS = -f bin
 
 # Wondering why I diddnt use object linking? Cause that would be a headache
