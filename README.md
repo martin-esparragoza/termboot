@@ -10,7 +10,6 @@ First build the binary:
 ```sh
 make
 ```
-will be fine.
 
 After that its a simple matter of flashing it:
 ```sh
@@ -21,5 +20,5 @@ make flash DRIVE=MY_MOUNTED_DRIVE
 If there is no drive specified it will create a virtual drive by the name of drive.img.
 
 # Dependencies:
-NASM
-LINUX (duh)
+* NASM
+* LINUX (duh)
