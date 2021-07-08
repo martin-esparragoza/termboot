@@ -57,5 +57,5 @@ main:
         jmp hang
 
     ; Make it so this takes up an entire sector
-    times ((($-$$)/512+1)*512) db 0 
+    times ((($-$$)/512+1)*512) nop 
 code_end:
