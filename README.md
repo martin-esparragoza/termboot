@@ -20,6 +20,6 @@ make flash DRIVE=MY_MOUNTED_DRIVE
 If there is no drive specified it will create a virtual drive by the name of drive.img.
 
 # Dependencies:
-* NASM
+* nasm
 * dd
 * make
