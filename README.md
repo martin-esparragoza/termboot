@@ -21,4 +21,5 @@ If there is no drive specified it will create a virtual drive by the name of dri
 
 # Dependencies:
 * NASM
-* Basic stuff that comes with linux (dd, make, etc)
+* dd
+* make
