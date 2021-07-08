@@ -9,6 +9,7 @@ org BOOTLOADER_EXECUTE_POSITION
 ; Interupts
 cli
 cld
+sti
 
 jmp boot
 err: ; TODO: Make this actually an error function
