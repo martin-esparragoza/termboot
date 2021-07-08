@@ -1,9 +1,9 @@
 ### Termboot
 
-A bootloader which never jumps to hyperspace and becomes a kernel or an operating system. Its simply a terminal that utilizes the BIOS.
+A bootloader which never jumps to hyperspace. It never becomes a kernel or an operating system. Its simply a terminal that utilizes the BIOS.
 
 ## What is this supposed to run on?
-This is supposed to run on x86 processors. Honestly not sure how itll run on different machines so set up a discussion please!
+This is supposed to run on x86 processors (we dont like floppies here). Honestly not sure how itll run on different machines so set up a discussion please!
 
 ## How do I build and flash?
 First build the binary:
@@ -21,4 +21,4 @@ If there is no drive specified it will create a virtual drive by the name of dri
 
 # Dependencies:
 * NASM
-* LINUX (duh)
+* Basic stuff that comes with linux (dd, make, etc)
