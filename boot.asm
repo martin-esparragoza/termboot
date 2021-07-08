@@ -12,41 +12,6 @@ cld
 
 jmp boot
 err: ; TODO: Make this actually an error function
-    pusha
-    mov al, ah
-    mov ah,0
-    mov dl,100
-    div dl
-    add al,'0'
-    mov ah, 0x0E
-    int 0x10
-    popa
-
-    pusha
-    mov al,ah
-    mov ah,0
-    mov dl,100
-    div dl
-    mov al,ah           ; because ah has the remainder after dividing by 100
-    mov ah,0
-    mov dl,10
-    div dl              ; after dividing the remainder by 10 we have the next digit
-    add al,'0'
-    mov ah,0x0e
-    int 0x10
-    popa
-
-    pusha
-    mov al,ah
-    mov ah,0
-    mov dl,10
-    div dl
-    mov al,ah           ; After dividing by 10, the remainder is the last digit
-    add al,'0'
-    mov ah,0x0e
-    int 0x10
-
-    popa
     jmp hang
 
 hang:
