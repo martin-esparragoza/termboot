@@ -48,15 +48,15 @@ main:
     jmp exec
     ; Will not be executed
     %include "include/stdio.asm"
-    message db "Welcome! Input a character: ",0 ; 0 is ending string character
+    msg db "Type something in: ",0
+    buf times 20 db 0
 
     exec:
-        mov bx, message ; Holds the adress of the message
+        mov bx, msg
         call print_string
-
-        call get_char
-        mov al, ah
-        call print_char
+        mov bx, buf
+        call get_string
+        call print_string
         jmp hang
 
     ; -1 because of ret instruction
