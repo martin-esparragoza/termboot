@@ -1,6 +1,10 @@
 print_char: ; Input: al
     mov ah, 0x0E
     int 0x10
+
+    cmp al, 13
+    jz print_newline
+
     ret
 
 print_string: ; Input: Start of string in bx reg (unsafe and ends with 0 to terminate string)
@@ -24,17 +28,25 @@ get_string: ; IO: bx (input: should be string buffer)
 
     loop:
         call get_char
-        ; push ax
-        ; mov al, ah
-        ; call print_char
-        ; pop ax
         mov [bx], ah
+        push ax
+        mov al, ah
+        call print_char
+        pop ax
         inc bx
 
         cmp ah, 13
         jz end_get_string
 
         jmp loop
+
+; misc
+print_newline:
+    push ax
+    mov al, 10
+    call print_char
+    pop ax
+    ret
 
 end_get_string:
     mov ah, 0

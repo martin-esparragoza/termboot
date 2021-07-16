@@ -49,14 +49,14 @@ main:
     ; Will not be executed
     %include "include/stdio.asm"
     msg db "Type something in: ",0
-    buf times 20 db 0
+    buf times 200 db 0
 
     exec:
         mov bx, msg
         call print_string
         mov bx, buf
         call get_string
-        call print_string
+        call print_string ; Will print out the string you just typed in
         jmp hang
 
     ; -1 because of ret instruction
