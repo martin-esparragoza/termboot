@@ -16,8 +16,8 @@ After that its a simple matter of flashing it:
 make flash DRIVE=MY_MOUNTED_DRIVE
 ```
 
-# NOTE:
-If there is no drive specified it will create a virtual drive by the name of drive.img.
+# NOTES:
+* If there is no drive specified `make flash` will create a virtual drive by the name of drive.img.
 
 # Dependencies:
 * nasm
