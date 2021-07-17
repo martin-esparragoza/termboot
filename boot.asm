@@ -63,5 +63,6 @@ main:
         call print_string
         jmp hang
 
+    ; TODO: Fix this because its not creating the right amount of bytes (no problem just unoptimized)
     times ((($-$$)/SECTOR_SIZE+1)*SECTOR_SIZE) nop ; Make it so this is a full sector on the disk so we can read it
 code_end:
