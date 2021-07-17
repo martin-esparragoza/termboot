@@ -23,3 +23,6 @@ If there is no drive specified it will create a virtual drive by the name of dri
 * nasm
 * dd
 * make
+
+# Want to use this as a template?
+I don't know why you would but theres a wiki page that goes over the standard libraries.
