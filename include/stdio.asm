@@ -10,7 +10,7 @@ print_char: ; Input: al
 print_string: ; Input: Start of string in bx reg (unsafe and ends with 0 to terminate string)
     mov al, [bx] ; BIOS prints out whatever is in al register
 
-    or al, al ; Check if end of string character 0 | 0 = 0
+    cmp al, 0
     jz end_print_string
 
     call print_char
