@@ -54,12 +54,14 @@ main:
     exec:
         mov bx, msg
         call print_string
+
         mov bx, buf
         call get_string
         call print_string ; Will print out the string you just typed in
+
+        mov bx, msg
+        call print_string
         jmp hang
 
-    ; -1 because of ret instruction
-    times ((($-$$)/SECTOR_SIZE+1)*SECTOR_SIZE)-1 nop ; Make it so this is a full sector on the disk so we can read it
-    ret
+    times ((($-$$)/SECTOR_SIZE+1)*SECTOR_SIZE) nop ; Make it so this is a full sector on the disk so we can read it
 code_end:
