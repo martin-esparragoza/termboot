@@ -4,6 +4,8 @@
 %define MAGIC_NUMBER 0xAA55 ; Marks as bootable
 %define SECTOR_SIZE 512
 %define HARD_DISK 1 << 7
+%define INPUT_BUFFER_SIZE 1024
+%define PROMPT "Termboot >>> "
 
 ; BOOTSECTOR ;
 org BOOTLOADER_EXECUTE_POSITION
@@ -39,29 +41,29 @@ boot:
     jc err
     jmp main
 
-    times 510 - ($ - $$) nop
+    times 510-($-$$) nop
     dw MAGIC_NUMBER
 ; BOOTSECTOR ;
 
 code_begin:
 main:
     jmp exec
-    ; Will not be executed
+    ; Will not be executed (includes)
     %include "include/stdio.asm"
-    msg db "Type something in: ",0
-    buf times 200 db 0
+    ; include command here
+
+    msg db PROMPT, 0
+    buf times INPUT_BUFFER_SIZE db 0
 
     exec:
         mov bx, msg
         call print_string
-
         mov bx, buf
         call get_string
-        call print_string ; Will print out the string you just typed in
+        ; loop through table of commands and execute one of them if it lines up
 
-        mov bx, msg
-        call print_string
-        jmp hang
+        jmp exec
+
 
     ; TODO: Fix this because its not creating the right amount of bytes (no problem just unoptimized)
     times ((($-$$)/SECTOR_SIZE+1)*SECTOR_SIZE) nop ; Make it so this is a full sector on the disk so we can read it
