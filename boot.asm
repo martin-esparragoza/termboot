@@ -4,7 +4,7 @@
 %define MAGIC_NUMBER 0xAA55 ; Marks as bootable
 %define SECTOR_SIZE 512
 %define HARD_DISK 1 << 7
-%define INPUT_BUFFER_SIZE 1024
+%define INPUT_BUFFER_SIZE 10
 %define PROMPT "Termboot >>> "
 
 ; BOOTSECTOR ;
@@ -61,10 +61,12 @@ main:
         mov bx, msg
         call print_string
         mov bx, buf
+        mov di, INPUT_BUFFER_SIZE
         call get_string
 
         ; Execute commands based on input ;
         ; bx regster already has the get_string output
+
         mov di, test_keyword
         call strcmp
         jz test_exec
