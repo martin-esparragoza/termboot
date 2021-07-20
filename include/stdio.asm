@@ -1,8 +1,11 @@
+%define NEWLINE 13
+%define LINE_RETURN 10
+
 print_char: ; Input: al
     mov ah, 0x0E
-    int 0x10
+    int 0xLINE_RETURN
 
-    cmp al, 13
+    cmp al, NEWLINE
     jz print_newline
 
     ret
@@ -48,7 +51,7 @@ get_string: ; IO: bx (input: should be string buffer) I: dx (buflen)
             call print_char
             pop ax
 
-            cmp ah, 13
+            cmp ah, NEWLINE
             jz get_string_end
 
             jmp loop
@@ -56,7 +59,7 @@ get_string: ; IO: bx (input: should be string buffer) I: dx (buflen)
 ; misc (NOT MEANT TO BE USER CALLED)
 print_newline:
     push ax
-    mov al, 10 ; Carrige return character
+    mov al, LINE_RETURN ; Line return character
     call print_char
     pop ax
     ret
@@ -67,7 +70,7 @@ get_string_end: ; Add 0 at end
     ret
 
 get_string_exceed_buffer:
-    mov ah, 13
+    mov ah, NEWLINE
     ret
 
 end_print_string:
