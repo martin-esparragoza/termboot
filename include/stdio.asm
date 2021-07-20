@@ -25,23 +25,22 @@ get_char: ; Output: ah
     mov ah, al
     ret
 
-get_string: ; IO: bx (input: should be string buffer) I: di (buflen)
-    mov dx, bx ; This will be used to store where bx's origin is
+get_string: ; IO: bx (input: should be string buffer) I: dx (buflen)
+    mov di, 0 ; Index
 
     loop:
         call get_char
-        ; Check if exceeding buffer size
-        push bx
-        add bx, 2 ; \n and \0 character
-        sub bx, dx
-        cmp bx, di
-        pop bx
-        jnge next
+        ; check if exceeding buffer size
+        push di
+        add di, 2 ; \n and \0
+        cmp di, dx
+        pop di
+        jnge get_string_next
         call get_string_exceed_buffer
 
-        next:
-            mov [bx], ah ; Set in buffer
-            inc bx ; Move to next point in string
+        get_string_next:
+            mov [bx+di], ah ; Set in buffer
+            inc di
 
             ; Push to stack because this will clobber the ax register
             push ax
@@ -50,7 +49,7 @@ get_string: ; IO: bx (input: should be string buffer) I: di (buflen)
             pop ax
 
             cmp ah, 13
-            jz end_get_string
+            jz get_string_end
 
             jmp loop
 
@@ -62,10 +61,9 @@ print_newline:
     pop ax
     ret
 
-end_get_string: ; Function is just for adding 0 at the end of the string and setting bx to the start
+get_string_end: ; Add 0 at end
     mov ah, 0
-    mov [bx], ah
-    mov bx, dx
+    mov [bx+di], ah
     ret
 
 get_string_exceed_buffer:
