@@ -9,6 +9,7 @@
 
 ; BOOTSECTOR ;
 org BOOTLOADER_EXECUTE_POSITION
+cld
 
 jmp boot
 err: ; TODO: Make this actually an error function
@@ -50,7 +51,8 @@ main:
     jmp exec
     ; Will not be executed (includes)
     %include "include/stdio.asm"
-    ; include command here
+    %include "include/string.asm"
+    %include "commands/test.asm"
 
     msg db PROMPT, 0
     buf times INPUT_BUFFER_SIZE db 0
@@ -60,7 +62,13 @@ main:
         call print_string
         mov bx, buf
         call get_string
-        ; loop through table of commands and execute one of them if it lines up
+
+        ; Execute commands based on input ;
+        ; bx regster already has the get_string output
+        mov di, test_keyword
+        call strcmp
+        jz test_exec
+        ; Execute commands based on input ;
 
         jmp exec
 
