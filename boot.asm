@@ -4,7 +4,7 @@
 %define MAGIC_NUMBER 0xAA55 ; Marks as bootable
 %define SECTOR_SIZE 512
 %define HARD_DISK 1 << 7
-%define INPUT_BUFFER_SIZE 10 ; 128
+%define INPUT_BUFFER_SIZE 128
 %define PROMPT "Termboot >>> "
 
 ; BOOTSECTOR ;
