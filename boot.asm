@@ -52,7 +52,7 @@ main:
     ; Will not be executed (includes)
     %include "include/stdio.asm"
     %include "include/string.asm"
-    %include "commands/test.asm"
+    ; %include "commands/example.asm"
 
     msg db PROMPT, 0
     buf times INPUT_BUFFER_SIZE db 0
@@ -66,9 +66,11 @@ main:
 
         ; Execute commands based on input ;
         ; bx regster already has the get_string output
-        mov di, test_keyword
-        call strcmp
-        jz test_exec
+
+        ; mov di, example_keyword
+        ; call strcmp
+        ; jz example_exec
+
         ; Execute commands based on input ;
 
         jmp exec
